@@ -17,5 +17,3 @@ Install basic packages
 Basics of project management
 
 Introduction to coding in R using tidyverse
-
-
