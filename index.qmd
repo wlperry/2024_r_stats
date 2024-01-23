@@ -1,5 +1,5 @@
 ---
-title: "2024_r_stats"
+title: "Intro Stats 2024"
 ---
 
 2024 r stats for bio graduate students
