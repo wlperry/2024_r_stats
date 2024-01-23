@@ -1,0 +1,27 @@
+---
+title: "Intro Stats 2024"
+---
+
+2024 R stats for biology students
+
+This is a seminar course on using R for common statistical tests that you might do in your thesis. This will be an initial introduction to R and RStudio using a lot of the materials from our introductory biostatistics course. This site will also serve as a repository for the course materials we cover and also the specialized statistics we cover at the end of the term that we will do for your specific work.
+
+I have found R to be a life changing program and use it nearly every day now.
+
+Here is a page with all the example data files - [Click HERE](/scripts/99_example_data_files.qmd)
+
+Topics to be covered:
+
+-   [Resources that are super helpful in using R - a lot of links and ideas](/scripts/01_resources.qmd)
+
+-   [Prior to class - setting up R and RStudio and installing essential librarie](/scripts/02_installing_r.qmd)s
+
+-   [Install packages and load libraries](/scripts/03_installing_libraries.qmd)
+
+-   [Basics of project management](/scripts/04_project_setup.qmd)
+
+-   [Reading in and writing to files](/scripts/05_reading_files.qmd)
+
+-   
+
+-   

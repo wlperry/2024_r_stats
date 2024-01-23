@@ -6,9 +6,9 @@ website:
   title: "2024_r_stats"
   navbar:
     left:
-      - href: index.qmd
+      - href: scripts/index.qmd
         text: Home
-      - about.qmd
+      - scripts/about.qmd
 
 format:
   html:

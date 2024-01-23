@@ -1,0 +1,15 @@
+---
+title: "Example Data Files"
+---
+
+Here are the example dataframes -
+
+| Dataframe | CSV version              |     | XLSX version                |
+|-----------|--------------------------|-----|-----------------------------|
+| M&M data  | [m&m csv](/data/mms.csv) |     | [m&m excel](/data/mms.xlsx) |
+|           |                          |     |                             |
+|           |                          |     |                             |
+|           |                          |     |                             |
+|           |                          |     |                             |
+|           |                          |     |                             |
+|           |                          |     |                             |

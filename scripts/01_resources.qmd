@@ -1,0 +1,13 @@
+---
+title: "R Resources"
+---
+
+This is a set of resources I have found to be super helpful in learning R.
+
+I will follow the ideas presented in [**R for Data Science (2e)**](https://r4ds.hadley.nz/)
+
+[![](/images/r4datascience.png){width="214"}](https://r4ds.hadley.nz/)
+
+A great resource for looking up issues is [StackOverflow](https://stackoverflow.com/) [![](/images/stackoverflow.png)](https://stackoverflow.com/)
+
+For help with statistics I found [R Companion](https://rcompanion.org/handbook/) to be a GREAT resource [![](/images/rcompanion.png)](https://rcompanion.org/handbook/)

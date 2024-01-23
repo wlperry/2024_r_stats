@@ -1,0 +1,81 @@
+---
+title: "Installing libraries"
+---
+
+## Packages / Libraries
+
+Libraries are sets of code that are stored either individually or as groups in packages that when installed add a lot of functionality to R. The tidyverse package for instance has a lot of libraries in it that make using R a lot easier for beginners and advanced users. Tidyverse builds on base R to make the syntax similar across many of the tasks you will want to do.
+
+### These are in my mind the essential libraries for R that I use all the time
+
+You will install these one time and then you need to load the libraries each time you use R and I usually have them loaded at the top of each script. Below is how to install libraries
+
+``` r
+install.packages("devtools") # install new things from developmental sources
+install.packages("tidyverse") # dplyr and piping and ggplot etc
+install.packages("lubridate") # dates and times
+install.packages("readxl") # read in excel files
+install.packages("janitor") # clean up excel imports
+install.packages("patchwork") # arrange multiple plots per page
+install.packages("skimr") # quick summary stats
+install.packages("plotly") # cool ggplot things
+install.packages("scales") # scales on ggplot axes
+```
+
+### Load Libraries in scripts
+
+This is how to load the libraries at the start of each script.
+
+``` r
+library(tidyverse) 
+library(lubridate) 
+library(scales) 
+library(readxl) 
+library(skimr) 
+library(janitor) 
+library(patchwork)
+```
+
+### These are libraries that are SUPER useful that you want to install and then only need to load the libraries one time and it will add a link to your addins drop down menu in RStudio.
+
+``` r
+install.packages("ggThemeAssist") # helps reformat code - only run library one time
+install.packages("styler") # allows you to reformat code to look like a pro!!
+
+library(ggThemeAssist)
+library(styler) 
+```
+
+You may need to go to the View in the menu and click show toolbar to see this
+
+![Addins menu](/images/addins.png){fig-alt="Addins_menu" fig-align="center" width="250"}
+
+### These libraries are useful for general statistics and used quite often.
+
+These are some of the better vetted statistical packages in my opinioon
+
+``` r
+
+install.packages("car") # stats and ANOVA - essential 
+install.packages("emmeans") # estimated marginal means for unbalanced designs 
+install.packages("multcomView") # paired comparisons - note this will interfear with DPLYR!!
+install.packages("Rmisc") # stats 
+install.packages("Hmisc") # stats install.packages("broom") # output models cleanly 
+```
+
+### These are specialized libraries for specialized statistics
+
+``` r
+{install.packages("GGally") # special ggplot graphs} install.packages("corrplot") # correlation plot matricies install.packages("survminer") # survival analysis  install.packages("survival") # survival analysis  install.packages("pwr") # power analysis  install.packages("vegan") # PCA and other sorts of multidimensional  install.packages("factoextra") # more PCA# mixed models  install.packages("lmerTest") # mixed model Anovas  install.packages("blme") # Bayesian mixed model Anovas
+```
+
+### Finally here are some lesser used packages that I do not use a lot but you might find useful
+
+``` r
+install.packages("hms") # useful for time series    
+install.packages("akima") # imputing new values         
+install.packages("RMySQL") # access MySQLserver     
+install.packages("rLakeAnalyzer") # used for the lake analyzer scripts 
+install.packages("LakeMetabolizer") #
+install.packages("colorRamps") # adds cool color templates
+```

@@ -1,0 +1,25 @@
+---
+title: "Installing R"
+---
+
+# How to install R and R Studio
+
+## Installing R
+
+R is a standalone program that can be used to do all the work we do. RStudio sits on top of R and allows the user to see a lot more of what is going on behind the scenes like what is loaded in the environment or dataframes that are loaded or graphs that have been made.
+
+First we will install R:
+
+Go to CRAN to download R for your particular computer system you are using. Note all R versions are named after Charlie Brown episodes. You will need to update this say every 6 months but downloading it and reinstalling
+
+[CRAN is located here](https://cran.r-project.org/)
+
+![](/images/cran.png){fig-align="center" width="1090"}
+
+## Installing R Studio
+
+Then you need to go to [POSIT to install RStudio here](https://cran.r-project.org/)
+
+Note they also have a link to R. Once installed you should be able open it and it will be a running version of RStudio. Then we are on to installing packages.
+
+![](/images/posit.png){width="750"}
