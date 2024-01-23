@@ -28,5 +28,8 @@
   },
   "scripts/05_reading_files.qmd": {
     "05_reading_files.html": "08c35063"
+  },
+  "scripts/06_ggplot.qmd": {
+    "06_ggplot.html": "e045f8cb"
   }
 }

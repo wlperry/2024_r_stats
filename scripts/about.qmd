@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-About this site
+This will have some stuff about the course later on...
 
-```{r}
-1 + 1
-```
+Right now enjoy the quiet
