@@ -22,6 +22,10 @@ Topics to be covered:
 
 -   [Reading in and writing to files](/scripts/05_reading_files.qmd)
 
--   
+-   [Plotting data - GGPlot basics](/scripts/06_ggplot.qmd)
+
+-   [Plotting - customizing plots in GGPlot](/scripts/07_customize_ggplots.qmd)
+
+-   [Plotting - summary statistics - mean and SE](/scripts/08_ggplot_summary_plots.qmd)
 
 -   
