@@ -1,0 +1,118 @@
+---
+title: "GGPlot summary plots"
+---
+
+# Objective
+
+## How to read in excel file and plot the data using GGPlot.
+
+## Data for the exercise
+
+[This page has a link to all of the data files](/scripts/99_example_data_files.qmd)
+
+We will use a mock data file that uses M&M's
+
+[M&M CSV file](/data/mms.csv) and also the [M&M Excel file](/data/mms.xlsx)
+
+## Load Libraries
+
+```{r, message=FALSE, warning=FALSE}
+# load the libraries each time you restart R
+library("readxl") # read in excel files
+library("skimr") # quick summary stats
+library("janitor") # clean up excel imports
+library("patchwork") # multipanel graphs
+library(skimr) # great way to do summary stats
+library("lubridate") # dates and times
+library("scales") # scales on ggplot ases
+library("tidyverse") # dplyr and piping and ggplot etc
+```
+
+##Read files
+
+```{r}
+# Note you can read in excel files just as easy
+  mm.df <- read_excel("../data/mms.xlsx")
+  
+  head(mm.df)
+
+
+```
+
+# Summary Stats
+
+Lets look at a few ways to get summary statistics The first is the simplist and uses base R
+
+```{r}
+summary(mm.df)
+```
+
+A better way is using Skimr
+
+```{r paged.print=FALSE}
+mm.df %>% 
+  skim()
+```
+
+The cool part of skimr is that you can do groups
+
+```{r paged.print=FALSE}
+mm.df %>% 
+  group_by(center) %>% 
+  skim()
+```
+
+Finally you can get a summary manually but is a bit longer. These can also be saved into a new dataframe.
+
+```{r}
+mm.df %>% 
+  group_by(center, color) %>% 
+  summarize(mean_diamter = mean(diameter, na.rm=TRUE),
+            mean_mass = mean(mass, na.rm=TRUE))
+```
+
+# Graphing mean and SE
+
+These are all well and good but looking at a graph is cool.
+
+```{r}
+# now for the plot
+ggplot(mm.df, aes(color, diameter, color=color)) + 
+  stat_summary(fun = mean, na.rm = TRUE,
+               geom = "point",
+               size = 3) + 
+  stat_summary(fun.data = mean_se, na.rm = TRUE,
+               geom = "errorbar",
+               width = 0.2) +
+  labs(x = "color", y = "Diamter (units)") 
+```
+
+We can also add in shape as a grouping varaible for the center of the m&m's
+
+```{r}
+# now for the plot
+ggplot(mm.df, aes(color, diameter, group=center, shape=center, color=color)) + 
+  stat_summary(fun = mean, na.rm = TRUE,
+               geom = "point",
+               size = 3) + 
+  stat_summary(fun.data = mean_se, na.rm = TRUE,
+               geom = "errorbar",
+               width = 0.2) +
+  labs(x = "color", y = "Diamter (units)") 
+```
+
+
+```{r}
+# now for the plot
+ggplot(mm.df, aes(color, diameter, group=center, shape=center, color=color)) + 
+  stat_summary(fun = mean, na.rm = TRUE,
+               geom = "point",
+               size = 3,
+               position= position_dodge(width = 0.2)) + 
+  stat_summary(fun.data = mean_se, na.rm = TRUE,
+               geom = "errorbar",
+               width = 0.2,
+               position= position_dodge(width = 0.2)) +
+  labs(x = "color", y = "Diamter (units)") 
+```
+

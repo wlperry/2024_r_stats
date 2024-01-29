@@ -31,5 +31,11 @@
   },
   "scripts/06_ggplot.qmd": {
     "06_ggplot.html": "e045f8cb"
+  },
+  "scripts/07_customize_ggplots.qmd": {
+    "07_customize_ggplots.html": "4183ae73"
+  },
+  "scripts/08_ggplot_summary_plots.qmd": {
+    "08_ggplot_summary_plots.html": "8f8204c0"
   }
 }

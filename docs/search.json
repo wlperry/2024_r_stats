@@ -4,7 +4,7 @@
     "href": "scripts/05_reading_files.html",
     "title": "Reading and writing data",
     "section": "",
-    "text": "The first and most important thing to be able to do is to read in a file - do stuff - and then save what you did to that file in the output directory. We will practice reading in CSV and Excel files.\n\n\n\nThis page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file\n\n\n\n\n# load the libraries each time you restart R\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\n\n\nAttaching package: 'scales'\n\nThe following object is masked from 'package:purrr':\n\n    discard\n\nThe following object is masked from 'package:readr':\n\n    col_factor\n\nlibrary(skimr)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nlibrary(patchwork)\n\n\n\n\n\n# Read in file using tidyverse code-----\nmm.df &lt;- read_csv(\"../data/mms.csv\")\n\nRows: 816 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): center, color\ndbl (2): diameter, mass\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\nNote that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm_excel.df &lt;- read_excel(\"../data/mms.xlsx\")\n\n\n\n\n\nOne way is to click the blue trianlge in the environment tab in the upper right\nYou can also use code to inspect the structure of the dataset\n\n# data Structure\nstr(mm.df)\n\nspc_tbl_ [816 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)\n $ center  : chr [1:816] \"peanut butter\" \"peanut butter\" \"peanut butter\" \"peanut butter\" ...\n $ color   : chr [1:816] \"blue\" \"brown\" \"orange\" \"brown\" ...\n $ diameter: num [1:816] 16.2 16.5 15.5 16.3 15.6 ...\n $ mass    : num [1:816] 2.18 2.01 1.78 1.98 1.62 2.59 1.9 2.55 2.07 2.26 ...\n - attr(*, \"spec\")=\n  .. cols(\n  ..   center = col_character(),\n  ..   color = col_character(),\n  ..   diameter = col_double(),\n  ..   mass = col_double()\n  .. )\n - attr(*, \"problems\")=&lt;externalptr&gt; \n\n# or\nglimpse(mm.df)\n\nRows: 816\nColumns: 4\n$ center   &lt;chr&gt; \"peanut butter\", \"peanut butter\", \"peanut butter\", \"peanut bu…\n$ color    &lt;chr&gt; \"blue\", \"brown\", \"orange\", \"brown\", \"yellow\", \"brown\", \"yello…\n$ diameter &lt;dbl&gt; 16.20, 16.50, 15.48, 16.32, 15.59, 17.43, 15.45, 17.30, 16.37…\n$ mass     &lt;dbl&gt; 2.18, 2.01, 1.78, 1.98, 1.62, 2.59, 1.90, 2.55, 2.07, 2.26, 1…\n\n\n\n\n\nBefore we go too far it is often important to save the modified data\nWe can use the read_r package to do this with write_csv\n\n# Saving files -----\n# We can save the file we just read in using \n# Saving dataframes -----\n# lets say you have made a lot of changes and its now time to save the dataframe\nwrite_csv(mm.df, \"../output/mm_output.csv\")"
+    "text": "The first and most important thing to be able to do is to read in a file - do stuff - and then save what you did to that file in the output directory. We will practice reading in CSV and Excel files.\n\n\n\nThis page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file\n\n\n\n\n# load the libraries each time you restart R\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\nlibrary(skimr)\nlibrary(janitor)\nlibrary(patchwork)\n\n\n\n\n\n# Read in file using tidyverse code-----\nmm.df &lt;- read_csv(\"../data/mms.csv\")\n\nRows: 816 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): center, color\ndbl (2): diameter, mass\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\nNote that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm_excel.df &lt;- read_excel(\"../data/mms.xlsx\")\n\n\n\n\n\nOne way is to click the blue trianlge in the environment tab in the upper right\nYou can also use code to inspect the structure of the dataset\n\n# data Structure\nstr(mm.df)\n\nspc_tbl_ [816 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)\n $ center  : chr [1:816] \"peanut butter\" \"peanut butter\" \"peanut butter\" \"peanut butter\" ...\n $ color   : chr [1:816] \"blue\" \"brown\" \"orange\" \"brown\" ...\n $ diameter: num [1:816] 16.2 16.5 15.5 16.3 15.6 ...\n $ mass    : num [1:816] 2.18 2.01 1.78 1.98 1.62 2.59 1.9 2.55 2.07 2.26 ...\n - attr(*, \"spec\")=\n  .. cols(\n  ..   center = col_character(),\n  ..   color = col_character(),\n  ..   diameter = col_double(),\n  ..   mass = col_double()\n  .. )\n - attr(*, \"problems\")=&lt;externalptr&gt; \n\n# or\nglimpse(mm.df)\n\nRows: 816\nColumns: 4\n$ center   &lt;chr&gt; \"peanut butter\", \"peanut butter\", \"peanut butter\", \"peanut bu…\n$ color    &lt;chr&gt; \"blue\", \"brown\", \"orange\", \"brown\", \"yellow\", \"brown\", \"yello…\n$ diameter &lt;dbl&gt; 16.20, 16.50, 15.48, 16.32, 15.59, 17.43, 15.45, 17.30, 16.37…\n$ mass     &lt;dbl&gt; 2.18, 2.01, 1.78, 1.98, 1.62, 2.59, 1.90, 2.55, 2.07, 2.26, 1…\n\n\n\n\n\nBefore we go too far it is often important to save the modified data\nWe can use the read_r package to do this with write_csv\n\n# Saving files -----\n# We can save the file we just read in using \n# Saving dataframes -----\n# lets say you have made a lot of changes and its now time to save the dataframe\nwrite_csv(mm.df, \"../output/mm_output.csv\")"
   },
   {
     "objectID": "scripts/05_reading_files.html#how-to-read-in-data-and-write-data-back-to-a-csv-file",
@@ -25,7 +25,7 @@
     "href": "scripts/05_reading_files.html#load-libraries",
     "title": "Reading and writing data",
     "section": "",
-    "text": "# load the libraries each time you restart R\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\n\n\nAttaching package: 'scales'\n\nThe following object is masked from 'package:purrr':\n\n    discard\n\nThe following object is masked from 'package:readr':\n\n    col_factor\n\nlibrary(skimr)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nlibrary(patchwork)"
+    "text": "# load the libraries each time you restart R\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\nlibrary(skimr)\nlibrary(janitor)\nlibrary(patchwork)"
   },
   {
     "objectID": "scripts/05_reading_files.html#read-in-the-file",
@@ -194,5 +194,138 @@
     "title": "Installing libraries",
     "section": "",
     "text": "Libraries are sets of code that are stored either individually or as groups in packages that when installed add a lot of functionality to R. The tidyverse package for instance has a lot of libraries in it that make using R a lot easier for beginners and advanced users. Tidyverse builds on base R to make the syntax similar across many of the tasks you will want to do.\n\n\nYou will install these one time and then you need to load the libraries each time you use R and I usually have them loaded at the top of each script. Below is how to install libraries\ninstall.packages(\"devtools\") # install new things from developmental sources\ninstall.packages(\"tidyverse\") # dplyr and piping and ggplot etc\ninstall.packages(\"lubridate\") # dates and times\ninstall.packages(\"readxl\") # read in excel files\ninstall.packages(\"janitor\") # clean up excel imports\ninstall.packages(\"patchwork\") # arrange multiple plots per page\ninstall.packages(\"skimr\") # quick summary stats\ninstall.packages(\"plotly\") # cool ggplot things\ninstall.packages(\"scales\") # scales on ggplot axes\n\n\n\nThis is how to load the libraries at the start of each script.\nlibrary(tidyverse) \nlibrary(lubridate) \nlibrary(scales) \nlibrary(readxl) \nlibrary(skimr) \nlibrary(janitor) \nlibrary(patchwork)\n\n\n\ninstall.packages(\"ggThemeAssist\") # helps reformat code - only run library one time\ninstall.packages(\"styler\") # allows you to reformat code to look like a pro!!\n\nlibrary(ggThemeAssist)\nlibrary(styler) \nYou may need to go to the View in the menu and click show toolbar to see this\n\n\n\nAddins menu\n\n\n\n\n\nThese are some of the better vetted statistical packages in my opinioon\n\ninstall.packages(\"car\") # stats and ANOVA - essential \ninstall.packages(\"emmeans\") # estimated marginal means for unbalanced designs \ninstall.packages(\"multcomView\") # paired comparisons - note this will interfear with DPLYR!!\ninstall.packages(\"Rmisc\") # stats \ninstall.packages(\"Hmisc\") # stats install.packages(\"broom\") # output models cleanly \n\n\n\n{install.packages(\"GGally\") # special ggplot graphs} install.packages(\"corrplot\") # correlation plot matricies install.packages(\"survminer\") # survival analysis  install.packages(\"survival\") # survival analysis  install.packages(\"pwr\") # power analysis  install.packages(\"vegan\") # PCA and other sorts of multidimensional  install.packages(\"factoextra\") # more PCA# mixed models  install.packages(\"lmerTest\") # mixed model Anovas  install.packages(\"blme\") # Bayesian mixed model Anovas\n\n\n\ninstall.packages(\"hms\") # useful for time series    \ninstall.packages(\"akima\") # imputing new values         \ninstall.packages(\"RMySQL\") # access MySQLserver     \ninstall.packages(\"rLakeAnalyzer\") # used for the lake analyzer scripts \ninstall.packages(\"LakeMetabolizer\") #\ninstall.packages(\"colorRamps\") # adds cool color templates"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html",
+    "href": "scripts/07_customize_ggplots.html",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "We will work on basic customization and then go to creating themes and also storing them in separate files. TO BE UPDATED SOON.\n\n\n\nThis page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file\n\n\n\n\n# this is also helpful with further customization \n# it appears in your toolbar under Addins - you install the package and run the library one time.\n# install.packages(ggThemeAssist)\n# library(ggThemeAssist)\n\n# load the libraries each time you restart R\nlibrary(\"readxl\") # read in excel files\nlibrary(\"skimr\") # quick summary stats\nlibrary(\"janitor\") # clean up excel imports\nlibrary(\"patchwork\") # multipanel graphs\nlibrary(\"lubridate\") # dates and times\nlibrary(\"scales\") # scales on ggplot ases\nlibrary(\"tidyverse\") # dplyr and piping and ggplot etc\n\n\n\n\n\n\nNote that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n # head(mm.df)\n\n\n\n\nAgain, this was done in the prior script and here it is simplified as I do in most ggplot commands. Note there is no data = or x = or y =.\n\nggplot(data=mm.df, aes(color, mass)) + # sometimes necessary is , group = group\n  geom_point()\n\n\n\n\n\n\n\n\nYou can use the aes(x, y, mapping) mappings statement to map a color, fill, shape, linesytyle, line type, size, or grouping to the data. If we add color to this aes statment it will color each of the m&m colors to a different default color.\n\n# Mapping a color to data groups ----\n# If you add \", color=group\" inside of the aes statement it will map a color to\n# each group and it is sometimes necessary to add \", group = group\"\nggplot(mm.df, aes(color, mass, color=color)) + \n  geom_point()\n\n\n\n\n\n\nWe know shape is in there so we should add that to the aes statement. It will map shape to the center of the m&m. Because this is a mappign to a different set of data it will add in a differnet legend for that mapping.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_point()\n\n\n\n\n\n\n\n\nNow lets reduce the overlap of the points. There are a lot of ways to do this. The first way will reduce overlap of all day with no respect to the what grouping it is. We can add this statement into the geom_point(**here**) statement.\nposition= position_jitter(width = 0.4)\nWe could also dodge the points based on the grouping of shape\nposition= position_dodge(width = 0.4)\nThis results in sets of data that are dodged by shape but still overlap. Finally we could try dodging and jittering the data to get the full effect\nposition= position_jitterdodge(jitter.width = 0.4, dodge.width = 0.9)\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_point(position= position_jitter(width = 0.4))\n\n\n\n\n\n\n\nYou can do this two ways. Below is the first way and I find this to work but is dangerous as if you mix up the order it will recolor points. Note that this was done below with blue and brown.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_boxplot() +\n  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +\n  labs(x = \"Color\", y = \"Mass\") +\n  scale_color_manual(name = \"Color\", \n                     values = c(\"brown\", \"blue\", \"green\", \"orange\", \"red\", \"yellow\"),\n                     labels = c(\"Blue\", \"Brown\", \"Green\", \"Orange\", \"Red\", \"Yellow\"))\n\n\n\n\n\n\n\nThis may help limit errors when assigning colors or shapes or fills to a value. Here you put in a values statement and in there you have the name of the variable in quotes and then the value you want to assing to it.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_boxplot() +\n  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +\n  labs(x = \"Color\", y = \"Mass\") +\n  scale_color_manual(name=\"Color\",\n                     values=c(  \"blue\"=\"blue\", \n                                \"brown\"=\"brown\", \n                                \"green\"=\"green\", \n                                \"orange\"= \"orange\", \n                                \"red\"=\"red\", \n                                \"yellow\"=\"yellow\"))"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#read-in-the-file",
+    "href": "scripts/07_customize_ggplots.html#read-in-the-file",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "Note that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n # head(mm.df)\n\n\n\n\nAgain, this was done in the prior script and here it is simplified as I do in most ggplot commands. Note there is no data = or x = or y =.\n\nggplot(data=mm.df, aes(color, mass)) + # sometimes necessary is , group = group\n  geom_point()"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#change-color",
+    "href": "scripts/07_customize_ggplots.html#change-color",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "You can use the aes(x, y, mapping) mappings statement to map a color, fill, shape, linesytyle, line type, size, or grouping to the data. If we add color to this aes statment it will color each of the m&m colors to a different default color.\n\n# Mapping a color to data groups ----\n# If you add \", color=group\" inside of the aes statement it will map a color to\n# each group and it is sometimes necessary to add \", group = group\"\nggplot(mm.df, aes(color, mass, color=color)) + \n  geom_point()\n\n\n\n\n\n\nWe know shape is in there so we should add that to the aes statement. It will map shape to the center of the m&m. Because this is a mappign to a different set of data it will add in a differnet legend for that mapping.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_point()"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#dodging-points",
+    "href": "scripts/07_customize_ggplots.html#dodging-points",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "Now lets reduce the overlap of the points. There are a lot of ways to do this. The first way will reduce overlap of all day with no respect to the what grouping it is. We can add this statement into the geom_point(**here**) statement.\nposition= position_jitter(width = 0.4)\nWe could also dodge the points based on the grouping of shape\nposition= position_dodge(width = 0.4)\nThis results in sets of data that are dodged by shape but still overlap. Finally we could try dodging and jittering the data to get the full effect\nposition= position_jitterdodge(jitter.width = 0.4, dodge.width = 0.9)\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_point(position= position_jitter(width = 0.4))"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#color-points-with-specific-colors",
+    "href": "scripts/07_customize_ggplots.html#color-points-with-specific-colors",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "You can do this two ways. Below is the first way and I find this to work but is dangerous as if you mix up the order it will recolor points. Note that this was done below with blue and brown.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_boxplot() +\n  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +\n  labs(x = \"Color\", y = \"Mass\") +\n  scale_color_manual(name = \"Color\", \n                     values = c(\"brown\", \"blue\", \"green\", \"orange\", \"red\", \"yellow\"),\n                     labels = c(\"Blue\", \"Brown\", \"Green\", \"Orange\", \"Red\", \"Yellow\"))"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#recoloring-points-using-a-11-relationship---safer.",
+    "href": "scripts/07_customize_ggplots.html#recoloring-points-using-a-11-relationship---safer.",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "This may help limit errors when assigning colors or shapes or fills to a value. Here you put in a values statement and in there you have the name of the variable in quotes and then the value you want to assing to it.\n\nggplot(mm.df, aes(color, mass, color=color, shape = center)) + \n  geom_boxplot() +\n  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +\n  labs(x = \"Color\", y = \"Mass\") +\n  scale_color_manual(name=\"Color\",\n                     values=c(  \"blue\"=\"blue\", \n                                \"brown\"=\"brown\", \n                                \"green\"=\"green\", \n                                \"orange\"= \"orange\", \n                                \"red\"=\"red\", \n                                \"yellow\"=\"yellow\"))"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html",
+    "href": "scripts/06_ggplot.html",
+    "title": "Plotting with GPlot",
+    "section": "",
+    "text": "This page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file\n\n\n\n\n# load the libraries each time you restart R\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\nlibrary(skimr)\nlibrary(janitor)\nlibrary(patchwork)\n\n\n\n\n\n\nNote that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n  head(mm.df)\n\n# A tibble: 6 × 4\n  center        color  diameter  mass\n  &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 peanut butter blue       16.2  2.18\n2 peanut butter brown      16.5  2.01\n3 peanut butter orange     15.5  1.78\n4 peanut butter brown      16.3  1.98\n5 peanut butter yellow     15.6  1.62\n6 peanut butter brown      17.4  2.59"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#data-for-the-exercise",
+    "href": "scripts/06_ggplot.html#data-for-the-exercise",
+    "title": "Plotting with GPlot",
+    "section": "",
+    "text": "This page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#load-libraries",
+    "href": "scripts/06_ggplot.html#load-libraries",
+    "title": "Plotting with GPlot",
+    "section": "",
+    "text": "# load the libraries each time you restart R\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(readxl)\nlibrary(scales)\nlibrary(skimr)\nlibrary(janitor)\nlibrary(patchwork)"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#read-in-the-file",
+    "href": "scripts/06_ggplot.html#read-in-the-file",
+    "title": "Plotting with GPlot",
+    "section": "",
+    "text": "Note that you can read in excel files in the same way.\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n  head(mm.df)\n\n# A tibble: 6 × 4\n  center        color  diameter  mass\n  &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 peanut butter blue       16.2  2.18\n2 peanut butter brown      16.5  2.01\n3 peanut butter orange     15.5  1.78\n4 peanut butter brown      16.3  1.98\n5 peanut butter yellow     15.6  1.62\n6 peanut butter brown      17.4  2.59"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#graphing-data",
+    "href": "scripts/06_ggplot.html#graphing-data",
+    "title": "Plotting with GPlot",
+    "section": "Graphing data",
+    "text": "Graphing data\nI feel that graphing is the key to all data analysis. If you can look at your data you can begin to see patterns that you may have predicted and want to test statistically. You will also be able to see outliers that exist that might affect results faster than looking at summary statistics. You can also determine if the data is normally distributed and how the variances compare from one group to another.\nUsing proper GGPlot code you are supposed to have data = , y = and x = ….\nI have found that these are not necessary most of the time and we can talk about this later.\n\nHow to plot an XY plot\nThis is a basic XY plot of the data and is one of the first steps in exploring data. Later on we will look at how to modify this plot to be easier to interpret.\nThe dataframe comes first and the AES statement is the aesthetics or the x and y data you want to see. You can also add colors, shapes, fill, line types and some other things to map to the data in this statement.\nTry adding color = color inside the aes(x=color, y=diameter) statement. You can also try shape = color\n\n# GGplot uses layers to build a graph\n\nggplot(data=mm.df, aes(x=color, y=diameter)) + # this sets up data \n  geom_point() # this adds a geometry to present the data from above\n\n\n\n\nBecause GGPlot builds things in layers you can add other geoms to the plot. Below you should try this code and see what happens when you put in + after geom_line() and then add geom_boxplot(fill=\"blue\"). Note try putting in before or after the geom_point() line.\n\n# Add geom_point() -----\n# Add points to the graph below using geom_point()\nggplot(mm.df, aes(x=color, y=diameter)) +\n  geom_point()"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#adding-axes-labels",
+    "href": "scripts/06_ggplot.html#adding-axes-labels",
+    "title": "Plotting with GPlot",
+    "section": "Adding axes labels",
+    "text": "Adding axes labels\nYou can add in axes labels that are not special. Using the labs(x= \" \", y = \" \") statement. You can add in line breaks by putting in a \\n in the statement that you have below.\n\n# Adding axes labels ----\nggplot(mm.df, aes(x=color, y=diameter)) +\n  geom_boxplot(fill=\"blue\") +\n  geom_point() +\n  labs(x = \"Color\", y = \"Diameter\")"
+  },
+  {
+    "objectID": "scripts/06_ggplot.html#formatted-axes-labels",
+    "href": "scripts/06_ggplot.html#formatted-axes-labels",
+    "title": "Plotting with GPlot",
+    "section": "Formatted axes labels",
+    "text": "Formatted axes labels\nWhat I find really nice is being able to create formatted axes labels. You can do this a few ways but I have found the that the expression statement works the best for my needs. You can add in a ~ to add a space between symbols and a * will connect things without a space.\n\n# Label expressions -----\n# Adding special formatting to labels\nggplot(mm.df, aes(x=color, y=diameter)) +\n  geom_boxplot() +\n  geom_point() +\n  labs(x = \"color\", y = expression(bold(\"Diameter (\"*mu*\"*1000)\")))"
+  },
+  {
+    "objectID": "scripts/08_ggplot_summary_plots.html",
+    "href": "scripts/08_ggplot_summary_plots.html",
+    "title": "GGPlot summary plots",
+    "section": "",
+    "text": "This page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file\n\n\n\n\n# load the libraries each time you restart R\nlibrary(\"readxl\") # read in excel files\nlibrary(\"skimr\") # quick summary stats\nlibrary(\"janitor\") # clean up excel imports\nlibrary(\"patchwork\") # multipanel graphs\nlibrary(skimr) # great way to do summary stats\nlibrary(\"lubridate\") # dates and times\nlibrary(\"scales\") # scales on ggplot ases\nlibrary(\"tidyverse\") # dplyr and piping and ggplot etc\n\n##Read files\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n  head(mm.df)\n\n# A tibble: 6 × 4\n  center        color  diameter  mass\n  &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 peanut butter blue       16.2  2.18\n2 peanut butter brown      16.5  2.01\n3 peanut butter orange     15.5  1.78\n4 peanut butter brown      16.3  1.98\n5 peanut butter yellow     15.6  1.62\n6 peanut butter brown      17.4  2.59"
+  },
+  {
+    "objectID": "scripts/08_ggplot_summary_plots.html#data-for-the-exercise",
+    "href": "scripts/08_ggplot_summary_plots.html#data-for-the-exercise",
+    "title": "GGPlot summary plots",
+    "section": "",
+    "text": "This page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file"
+  },
+  {
+    "objectID": "scripts/08_ggplot_summary_plots.html#load-libraries",
+    "href": "scripts/08_ggplot_summary_plots.html#load-libraries",
+    "title": "GGPlot summary plots",
+    "section": "",
+    "text": "# load the libraries each time you restart R\nlibrary(\"readxl\") # read in excel files\nlibrary(\"skimr\") # quick summary stats\nlibrary(\"janitor\") # clean up excel imports\nlibrary(\"patchwork\") # multipanel graphs\nlibrary(skimr) # great way to do summary stats\nlibrary(\"lubridate\") # dates and times\nlibrary(\"scales\") # scales on ggplot ases\nlibrary(\"tidyverse\") # dplyr and piping and ggplot etc\n\n##Read files\n\n# Note you can read in excel files just as easy\n  mm.df &lt;- read_excel(\"../data/mms.xlsx\")\n  \n  head(mm.df)\n\n# A tibble: 6 × 4\n  center        color  diameter  mass\n  &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 peanut butter blue       16.2  2.18\n2 peanut butter brown      16.5  2.01\n3 peanut butter orange     15.5  1.78\n4 peanut butter brown      16.3  1.98\n5 peanut butter yellow     15.6  1.62\n6 peanut butter brown      17.4  2.59"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#how-to-how-to-customize-ggplot-graphs",
+    "href": "scripts/07_customize_ggplots.html#how-to-how-to-customize-ggplot-graphs",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "We will work on basic customization and then go to creating themes and also storing them in separate files. TO BE UPDATED SOON."
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#data-for-the-exercise",
+    "href": "scripts/07_customize_ggplots.html#data-for-the-exercise",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "This page has a link to all of the data files\nWe will use a mock data file that uses M&M’s\nM&M CSV file and also the M&M Excel file"
+  },
+  {
+    "objectID": "scripts/07_customize_ggplots.html#load-libraries",
+    "href": "scripts/07_customize_ggplots.html#load-libraries",
+    "title": "GGPlot customizing plots",
+    "section": "",
+    "text": "# this is also helpful with further customization \n# it appears in your toolbar under Addins - you install the package and run the library one time.\n# install.packages(ggThemeAssist)\n# library(ggThemeAssist)\n\n# load the libraries each time you restart R\nlibrary(\"readxl\") # read in excel files\nlibrary(\"skimr\") # quick summary stats\nlibrary(\"janitor\") # clean up excel imports\nlibrary(\"patchwork\") # multipanel graphs\nlibrary(\"lubridate\") # dates and times\nlibrary(\"scales\") # scales on ggplot ases\nlibrary(\"tidyverse\") # dplyr and piping and ggplot etc"
   }
 ]

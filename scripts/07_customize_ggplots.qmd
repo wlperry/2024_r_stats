@@ -1,0 +1,167 @@
+---
+title: "GGPlot customizing plots"
+---
+
+# Objective
+
+## How to How to customize ggplot graphs
+
+We will work on basic customization and then go to creating themes and also storing them in separate files. TO BE UPDATED SOON.
+
+## Data for the exercise
+
+[This page has a link to all of the data files](/scripts/99_example_data_files.qmd)
+
+We will use a mock data file that uses M&M's
+
+[M&M CSV file](/data/mms.csv) and also the [M&M Excel file](/data/mms.xlsx)
+
+## Load Libraries
+
+```{r, message=FALSE, warning=FALSE}
+
+# this is also helpful with further customization 
+# it appears in your toolbar under Addins - you install the package and run the library one time.
+# install.packages(ggThemeAssist)
+# library(ggThemeAssist)
+
+# load the libraries each time you restart R
+library("readxl") # read in excel files
+library("skimr") # quick summary stats
+library("janitor") # clean up excel imports
+library("patchwork") # multipanel graphs
+library("lubridate") # dates and times
+library("scales") # scales on ggplot ases
+library("tidyverse") # dplyr and piping and ggplot etc
+```
+
+## Read in the file
+
+#### Read in excel files
+
+Note that you can read in excel files in the same way.
+
+```{r}
+# Note you can read in excel files just as easy
+  mm.df <- read_excel("../data/mms.xlsx")
+  
+ # head(mm.df)
+```
+
+### The XY plot
+
+Again, this was done in the prior script and here it is simplified as I do in most ggplot commands. Note there is no `data =` or `x =` or `y =`.
+
+```{r}
+ggplot(data=mm.df, aes(color, mass)) + # sometimes necessary is , group = group
+  geom_point()
+```
+
+## Change color
+
+You can use the **`aes(x, y, mapping)`** mappings statement to map a color, fill, shape, linesytyle, line type, size, or grouping to the data. If we add color to this aes statment it will color each of the m&m colors to a different default color.
+
+```{r}
+# Mapping a color to data groups ----
+# If you add ", color=group" inside of the aes statement it will map a color to
+# each group and it is sometimes necessary to add ", group = group"
+ggplot(mm.df, aes(color, mass, color=color)) + 
+  geom_point()
+```
+
+### Adding the shape of the center of the m&m
+
+We know shape is in there so we should add that to the aes statement. It will map shape to the center of the m&m. Because this is a mappign to a different set of data it will add in a differnet legend for that mapping.
+
+```{r}
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_point()
+```
+
+## Dodging points
+
+Now lets reduce the overlap of the points. There are a lot of ways to do this. The first way will reduce overlap of all day with no respect to the what grouping it is. We can add this statement into the `geom_point(**here**)` statement.
+
+```         
+position= position_jitter(width = 0.4)
+```
+
+We could also dodge the points based on the grouping of shape
+
+```         
+position= position_dodge(width = 0.4)
+```
+
+This results in sets of data that are dodged by shape but still overlap. Finally we could try dodging and jittering the data to get the full effect
+
+```         
+position= position_jitterdodge(jitter.width = 0.4, dodge.width = 0.9)
+```
+
+```{r}
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_point(position= position_jitter(width = 0.4))
+```
+
+## Color Points with specific colors
+
+You can do this two ways. Below is the first way and I find this to work but is dangerous as if you mix up the order it will recolor points. Note that this was done below with blue and brown.
+
+```{r}
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_boxplot() +
+  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +
+  labs(x = "Color", y = "Mass") +
+  scale_color_manual(name = "Color", 
+                     values = c("brown", "blue", "green", "orange", "red", "yellow"),
+                     labels = c("Blue", "Brown", "Green", "Orange", "Red", "Yellow"))
+```
+
+## Recoloring points using a 1:1 relationship - safer.
+
+This may help limit errors when assigning colors or shapes or fills to a value. Here you put in a values statement and in there you have the name of the variable in quotes and then the value you want to assing to it.
+
+```{r}
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_boxplot() +
+  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +
+  labs(x = "Color", y = "Mass") +
+  scale_color_manual(name="Color",
+                     values=c(  "blue"="blue", 
+                                "brown"="brown", 
+                                "green"="green", 
+                                "orange"= "orange", 
+                                "red"="red", 
+                                "yellow"="yellow"))
+```
+
+# Facetting graphs
+
+If we want to break up this graph into separate panels we can do this with Patchwork by adding in a `facet_grid() or facet_wrap()` statement. These do different things. The grid lays it out in a grid of rows and columns and the wrap wraps the graphs from left to right to new rows. you should try both. The value in the parenthes is the parameter you want to wrap by using facet wrap. In facet grid it is row\~column to wrap by two variables and it could be .\~column or row\~. to do grids with only on varaible.
+
+```{r}
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_boxplot() +
+  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +
+  labs(x = "color", y = "Mass") +
+  scale_color_manual(name = "Color", 
+                     values = c("blue", "brown", "green", "orange", "red", "yellow"),
+                     labels = c("Blue", "Brown", "Green", "Orange", "Red", "Yellow"))+
+  facet_wrap(~center)
+
+```
+
+```{r}
+# Facet_grid -----
+# lets you make a grid of one or two variables in a grid
+
+ggplot(mm.df, aes(color, mass, color=color, shape = center)) + 
+  geom_boxplot() +
+  geom_point(position= position_jitterdodge(jitter.width = 0.4)) +
+  labs(x = "color", y = "Mass") +
+  scale_color_manual(name = "Color", 
+                     values = c("blue", "brown", "green", "orange", "red", "yellow"),
+                     labels = c("Blue", "Brown", "Green", "Orange", "Red", "Yellow"))+
+  facet_grid(center~., scales="free_y") # or free_x or free
+
+```

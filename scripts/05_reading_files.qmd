@@ -18,7 +18,7 @@ We will use a mock data file that uses M&M's
 
 ## Load Libraries
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # load the libraries each time you restart R
 library(tidyverse)
 library(lubridate)
@@ -68,59 +68,4 @@ We can use the read_r package to do this with write_csv
 # Saving dataframes -----
 # lets say you have made a lot of changes and its now time to save the dataframe
 write_csv(mm.df, "../output/mm_output.csv")
-```
-
-# GGPlot
-
-This script will go over a lot of the basics of creating graphs in GGPlot and later on we will go over how to do more specialized things. This is by no means a complete guide to GGPlot but will do most of the things that you will need to do in GGPlot. Any suggestions or recommendations of things to add would be welcome.
-
-## Graphing data
-
-I feel that graphing is the key to all data analysis. If you can look at your data you can begin to see patterns that you may have predicted and want to test statistically. You will also be able to see outliers that exist that might affect resutls faster than looking at summary statistics.
-
-Using proper GGPlot code you are supposed to have dat = , y = and x = ....\
-I have found that these are not necessary *most of the time* and we can talk about this later.
-
-```{r}
-# GGplot uses layers to build a graph
-
-ggplot(data=mm.df, aes(x=color, y=diameter)) + # this sets up data 
-  geom_point() # this adds a geometry to present the data from above
-```
-
-Because GGPlot builds things in layers you can add other geoms to the plot. Below you should try this code and see what happens when you put in **`+`** after geom_line() and then add **`geom_boxplot()`**.
-
-```{r}
-# Add geom_point() -----
-# Add points to the graph below using geom_point()
-ggplot(mm.df, aes(x=color, y=diameter)) +
-  geom_point() 	
-
-```
-
-## Adding axes labels
-
-You can add in simple axes labels that are not formatted. Using the labs(x= " ", y = " ") statement. You can add in line breaks by putting in a `\n` in the statement that you have below.
-
-```{r}
-# Adding axes labels ----
-ggplot(mm.df, aes(x=color, y=diameter)) +
-  geom_boxplot() +
-  geom_point() +
-  labs(x = "Color", y = "Diameter")
-
-```
-
-## Formatted axes labels
-
-What I find really nice is being able to create formatted axes labels. You can do this a few ways but I have found the that the expression statement works the best for my needs. You can add in a `~` to add a space between symbols and a `*` will connect things without a space.
-
-```{r}
-# Label expressions -----
-# Adding special formatting to labels
-ggplot(mm.df, aes(x=color, y=diameter)) +
-  geom_boxplot() +
-  geom_point() +
-  labs(x = "color", y = expression(bold("Diameter ("*mu*"*1000)")))
-
 ```
